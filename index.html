@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PSL Learning Platform — Graduation Project Report Outline</title>
+<style>
+  :root{
+    --ink:#1c2530;
+    --sub:#5b6b7a;
+    --accent:#0f6e5f;      /* deep teal, echoing "sign language / hands" green-teal */
+    --accent-soft:#e6f3f0;
+    --line:#dfe6e5;
+    --paper:#fdfdfc;
+    --chip:#0f6e5f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Georgia','Iowan Old Style', 'Times New Roman', serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    font-size:15px;
+  }
+  h1,h2,h3,h4{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .page{
+    max-width:840px;
+    margin:0 auto;
+    padding:0 48px;
+  }
+
+  /* ---------- COVER ---------- */
+  .cover{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:0 64px;
+    background:
+      linear-gradient(180deg, var(--accent) 0%, var(--accent) 6px, transparent 6px),
+      var(--paper);
+    page-break-after:always;
+  }
+  .cover .kicker{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:12px;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:18px;
+  }
+  .cover h1{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:42px;
+    font-weight:800;
+    line-height:1.15;
+    margin:0 0 14px 0;
+  }
+  .cover .subtitle{
+    font-size:18px;
+    color:var(--sub);
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    max-width:560px;
+    margin-bottom:40px;
+  }
+  .cover-meta{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:13.5px;
+    color:var(--sub);
+    border-top:1px solid var(--line);
+    padding-top:22px;
+    display:grid;
+    grid-template-columns:140px 1fr;
+    row-gap:8px;
+    max-width:520px;
+  }
+  .cover-meta b{color:var(--ink); font-weight:600;}
+
+  /* ---------- TOC ---------- */
+  .toc{
+    padding:70px 0 40px 0;
+    page-break-after:always;
+  }
+  .toc h2{
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:28px;
+  }
+  .toc-item{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    padding:10px 0;
+    border-bottom:1px dotted var(--line);
+    font-family:'Helvetica Neue', Arial, sans-serif;
+  }
+  .toc-num{
+    font-weight:800;
+    color:var(--accent);
+    width:26px;
+    flex:none;
+  }
+  .toc-title{font-weight:600; flex:1;}
+  .toc-status{font-size:11px; color:var(--sub); font-weight:600; text-transform:uppercase; letter-spacing:0.05em;}
+  .toc-status.done{color:var(--accent);}
+
+  /* ---------- CHAPTERS ---------- */
+  .chapter{
+    padding:60px 0 10px 0;
+    page-break-before:always;
+  }
+  .chapter-label{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .chapter h2{
+    font-size:28px;
+    font-weight:800;
+    margin:0 0 6px 0;
+  }
+  .status-badge{
+    display:inline-block;
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    padding:3px 10px;
+    border-radius:20px;
+    margin-bottom:26px;
+  }
+  .status-badge.done{background:var(--accent-soft); color:var(--accent);}
+  .status-badge.progress{background:#fdf1de; color:#a4650a;}
+  .status-badge.upcoming{background:#f1f1ef; color:var(--sub);}
+
+  .point{
+    display:grid;
+    grid-template-columns:40px 1fr;
+    gap:16px;
+    padding:18px 0;
+    border-top:1px solid var(--line);
+  }
+  .point:last-child{border-bottom:1px solid var(--line);}
+  .point-num{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-weight:800;
+    font-size:15px;
+    color:var(--accent);
+    background:var(--accent-soft);
+    height:28px;width:28px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .point-title{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--ink);
+    margin:0 0 6px 0;
+  }
+  .point-explain{
+    color:var(--sub);
+    font-size:14.5px;
+    margin:0;
+  }
+  .point-explain b{color:var(--ink);}
+
+  .highlight-box{
+    margin:26px 0 0 0;
+    background:var(--accent-soft);
+    border-left:4px solid var(--accent);
+    padding:16px 20px;
+    border-radius:4px;
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:13.5px;
+    color:#1c4038;
+  }
+  .highlight-box b{color:var(--accent);}
+
+  .footer-note{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:11px;
+    color:var(--sub);
+    text-align:center;
+    padding:30px 0 60px 0;
+  }
+
+  @media print{
+    .cover{min-height:100vh;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= COVER ================= -->
+<div class="cover">
+  <div class="kicker">Graduation Project Report — Outline &amp; Chapter Map</div>
+  <h1>A Web-Based Interactive Learning Platform<br>for Palestinian Sign Language</h1>
+  <div class="subtitle">Chapter-by-chapter structure, required points, and explanations — including dataset construction and machine learning model building as core project chapters.</div>
+  <div class="cover-meta">
+    <span>Team</span><span><b>Nadine Alazzeh</b> — UI/UX &amp; Frontend</span>
+    <span></span><span><b>Noor Jaber</b> — Backend</span>
+    <span></span><span><b>Shahd Batta</b> — Data &amp; Machine Learning</span>
+    <span>Institution</span><span>PTUK University</span>
+    <span>Program</span><span>Computer Science / Data Science</span>
+    <span>Duration</span><span>Two-semester graduation project</span>
+  </div>
+</div>
+
+<!-- ================= TOC ================= -->
+<div class="page">
+<div class="toc">
+  <h2>Table of Contents</h2>
+
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-title">Introduction</span><span class="toc-status done">Completed</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-title">Methodology</span><span class="toc-status done">Completed</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-title">System Analysis</span><span class="toc-status">In progress</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-title">Dataset Design &amp; Construction</span><span class="toc-status">Upcoming</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-title">System Design &amp; Architecture</span><span class="toc-status">Upcoming</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-title">Model Building &amp; Training</span><span class="toc-status">Upcoming</span></div>
+  <div class="toc-item"><span class="toc-num">07</span><span class="toc-title">Implementation</span><span class="toc-status">Upcoming</span></div>
+  <div class="toc-item"><span class="toc-num">08</span><span class="toc-title">Testing &amp; Evaluation</span><span class="toc-status">Upcoming</span></div>
+  <div class="toc-item"><span class="toc-num">09</span><span class="toc-title">Results &amp; Discussion</span><span class="toc-status">Upcoming</span></div>
+  <div class="toc-item"><span class="toc-num">10</span><span class="toc-title">Conclusion &amp; Future Work</span><span class="toc-status">Upcoming</span></div>
+
+  <div class="highlight-box">
+    <b>Why this order:</b> Chapter 4 (Dataset) and Chapter 6 (Model) are placed on either side of System Design (Ch5) so they mirror your real project timeline — Semester 1 builds the dataset, Semester 2 trains the model — and each stands as its own contribution instead of being buried inside "Implementation."
+  </div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 1 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 01</div>
+  <h2>Introduction</h2>
+  <span class="status-badge done">Completed</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Background</p>
+    <p class="point-explain">Overview of sign language as a communication method and why the Deaf/hard-of-hearing (HoH) community in Palestine needs a dedicated digital learning tool.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Problem Statement</p>
+    <p class="point-explain">No app currently teaches <b>Palestinian Sign Language (PSL)</b> specifically. Existing regional apps (Mushir, Esharti) cover general Arabic Sign Language only, and none offer camera-verified production practice.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Motivation</p>
+    <p class="point-explain">Scale of the need: a significant Deaf/HoH population in Palestine, worsened post-conflict disability rates in Gaza, and a complete absence of PSL vocabulary datasets or scalable tools.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Objectives</p>
+    <p class="point-explain">What the project sets out to build: an interactive learning platform, an original PSL word dataset, and a working sign-recognition pipeline.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Scope &amp; Limitations</p>
+    <p class="point-explain">Defines project boundaries: Alphabet + Numbers + 30–40 original words only. A wider vocabulary is explicitly future work, not a deliverable of this project.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">6</div><div>
+    <p class="point-title">Expected Contributions &amp; Benefits</p>
+    <p class="point-explain">The first PSL-specific dataset, the first camera-verified PSL learning tool, and an accessible, scalable web-based format.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 2 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 02</div>
+  <h2>Methodology</h2>
+  <span class="status-badge done">Completed</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Development Approach</p>
+    <p class="point-explain"><b>Agile, sprint-based</b> development, chosen to allow an MVP-first release followed by iterative dataset and model expansion.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Team Roles</p>
+    <p class="point-explain">Nadine (UI/UX &amp; Frontend), Noor (Backend), Shahd (Data &amp; ML) — with explanation of cross-collaboration points, e.g. the frontend needs to consume the ML output format.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Project Timeline</p>
+    <p class="point-explain">Two-semester split: <b>Semester 1</b> = dataset creation + core app scaffolding; <b>Semester 2</b> = model training + full integration.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Risk Management</p>
+    <p class="point-explain">Each risk — dataset creation delays, signer consent/privacy issues, recognition accuracy, browser hardware limitations, tight timeline — paired with why it's a risk and how it's mitigated.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Constraints</p>
+    <p class="point-explain">Zero external funding (fully self-funded by the team), no GPU access (hence use of Google Colab), and standard student timeline constraints.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 3 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 03</div>
+  <h2>System Analysis</h2>
+  <span class="status-badge progress">In Progress</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Actors</p>
+    <p class="point-explain"><b>Learner</b> (consumes lessons, practices signs) and <b>Admin</b> (manages content, categories, dataset, views analytics) — with an explanation of what each actor can and cannot do.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Membership &amp; Verification</p>
+    <p class="point-explain">Signup via email/password with an email verification step, explained in terms of account integrity and safeguarding minors.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Functional Requirements</p>
+    <p class="point-explain">Lesson progression, camera capture, pass/fail logic, ticket deduction/reward, streaks, admin content management — each with a one-line justification.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Non-Functional Requirements</p>
+    <p class="point-explain">Performance (low-latency in-browser inference), privacy (no raw video stored), usability (low-pressure practice before the graded test), scalability (Firestore), security (auth, consent gating).</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Feasibility Study</p>
+    <p class="point-explain"><b>Technical:</b> MediaPipe + a lightweight classifier is achievable without a GPU server. <b>Operational:</b> team skills match assigned roles. <b>Economic:</b> zero-cost tools (Colab, Firebase free tier) make the project viable without funding.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">6</div><div>
+    <p class="point-title">Use Case Diagrams</p>
+    <p class="point-explain">Visual mapping of Learner and Admin interactions with the system — lesson flow, admin dataset management.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">7</div><div>
+    <p class="point-title">Sequence Diagrams</p>
+    <p class="point-explain">Step-by-step flow of key processes, e.g. a "production test" attempt → camera capture → keypoint extraction → classifier judgment → pass/fail → UI update.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">8</div><div>
+    <p class="point-title">ER Diagram</p>
+    <p class="point-explain">Entity relationships: User, Lesson, Category, Word/Sign, Progress, Attempt, Ticket, Consent Record.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">9</div><div>
+    <p class="point-title">Database Tables</p>
+    <p class="point-explain">Concrete Firestore collection/field definitions matching the ER diagram, with reasoning for choosing a NoSQL structure for this use case.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 4 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 04 · Dataset Track</div>
+  <h2>Dataset Design &amp; Construction</h2>
+  <span class="status-badge upcoming">Upcoming</span>
+
+  <div class="highlight-box">This chapter gives your <b>original PSL dataset</b> a dedicated home — treated as a research contribution in its own right, not a side note.</div>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Dataset Strategy</p>
+    <p class="point-explain">Justifies the two-track approach: an existing public dataset for Alphabet/Numbers (fast MVP) vs. an original filmed dataset for 30–40 words, since no PSL data exists for these.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Signer Recruitment</p>
+    <p class="point-explain">How signers were sourced, selection criteria (fluency, diversity), and why signer variety matters for model generalization.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Consent &amp; Ethics</p>
+    <p class="point-explain">Explicit likeness-use agreements signed by signers; extra caution justified by likely use by minors; alignment with the platform's privacy-first design.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Data Collection Protocol</p>
+    <p class="point-explain">Filming setup: multiple angles, slow-motion capture, consistent lighting/background, and number of repetitions per sign — explaining why this improves classifier robustness.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Labeling &amp; Annotation</p>
+    <p class="point-explain">Labeling scheme (sign name, category, signer ID, angle), tools used, and quality-control steps such as cross-checking labels.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">6</div><div>
+    <p class="point-title">Keypoint Extraction Pipeline</p>
+    <p class="point-explain">Using <b>MediaPipe Hands</b> to convert raw video into keypoint coordinates; explains why keypoints — not pixels — are used: smaller data, privacy-preserving, faster inference.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">7</div><div>
+    <p class="point-title">Dataset Structure &amp; Storage</p>
+    <p class="point-explain">Final schema (per-sign keypoint sequences + labels), train/validation/test split ratios, dataset size/statistics, and how raw video is discarded or securely isolated after keypoint extraction.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 5 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 05</div>
+  <h2>System Design &amp; Architecture</h2>
+  <span class="status-badge upcoming">Upcoming</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">High-Level Architecture</p>
+    <p class="point-explain">Diagram showing frontend (React) ↔ backend (Node.js/Express) ↔ Firebase (Auth/Firestore) ↔ in-browser recognition pipeline, explaining why processing happens client-side.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Technology Justification</p>
+    <p class="point-explain">Why React (component reuse for lesson UI), why Node/Express (lightweight API layer), why Firebase (fast auth + real-time database without dedicated server ops).</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Recognition Pipeline Design</p>
+    <p class="point-explain">MediaPipe extracts keypoints in-browser → a lightweight classifier scores the attempt; revisits the privacy/performance reasoning at the design level.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Data Flow Diagrams</p>
+    <p class="point-explain">Trace of data movement: camera → keypoints → classifier → result → Firestore (pass/fail only — never raw video).</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">UI/UX Design</p>
+    <p class="point-explain">Wireframes for the lesson loop: Learn (video, slow-motion, angles) → Recognize (low-pressure) → Produce (camera test) → Pass/Replay-on-Fail, with the pedagogical reasoning behind scaffolded difficulty.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">6</div><div>
+    <p class="point-title">Gamification System Design</p>
+    <p class="point-explain">Ticket economy rules, streaks, XP, and spaced repetition for missed signs — explaining how each mechanic drives retention and practice frequency.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">7</div><div>
+    <p class="point-title">Monetization Architecture</p>
+    <p class="point-explain">Free tier (ads + rewarded-ad ticket refill) vs. VIP tier (no ads, unlimited tickets) — the business-model reasoning, not just the mechanics.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 6 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 06 · Model Track</div>
+  <h2>Model Building &amp; Training</h2>
+  <span class="status-badge upcoming">Upcoming</span>
+
+  <div class="highlight-box">The machine-learning counterpart to Chapter 4 — this is where the <b>model-building</b> work belongs, using the dataset produced there.</div>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Model Selection Rationale</p>
+    <p class="point-explain">Why a lightweight classifier on keypoints was chosen over heavy video-based CNNs — driven by the no-GPU constraint and the need for browser-side inference.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Feature Engineering</p>
+    <p class="point-explain">Normalizing keypoint coordinates for scale/position invariance, and possibly encoding motion/sequence for dynamic signs vs. static ones (alphabet vs. words).</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Training Setup</p>
+    <p class="point-explain">Google Colab environment, chosen framework (e.g. TensorFlow/PyTorch), the train/validation/test split from Chapter 4's dataset, and hyperparameter choices.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Training Process</p>
+    <p class="point-explain">Separate training runs for (a) the public Alphabet/Numbers dataset and (b) the original 30–40 word dataset, explaining why they may need different handling — static pose vs. word-level gesture sequences.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Evaluation Metrics</p>
+    <p class="point-explain">Accuracy, confusion matrix, per-sign performance breakdown — with emphasis on why false-pass and false-fail rates matter specifically for a pass/fail learning gate.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">6</div><div>
+    <p class="point-title">Model Optimization</p>
+    <p class="point-explain">Any tuning done to reduce model size/latency for in-browser deployment, such as quantization, pruning, or architecture simplification.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">7</div><div>
+    <p class="point-title">Deployment / Inference</p>
+    <p class="point-explain">Exporting the trained model to a browser-compatible format and integrating it into the recognition pipeline described in Chapter 5.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 7 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 07</div>
+  <h2>Implementation</h2>
+  <span class="status-badge upcoming">Upcoming</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Frontend Implementation</p>
+    <p class="point-explain">Component structure, lesson flow screens, and camera integration.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Backend Implementation</p>
+    <p class="point-explain">API endpoints and business logic such as ticket deduction and progress tracking.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Firebase Integration</p>
+    <p class="point-explain">Auth rules and Firestore security rules enforcing the privacy-first design, e.g. blocking any raw video writes.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Recognition Pipeline Integration</p>
+    <p class="point-explain">Connecting MediaPipe extraction and the trained model end-to-end inside the live app.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Ticket / Monetization Logic</p>
+    <p class="point-explain">Code-level implementation of ticket regeneration, ad triggers, and VIP checks.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">6</div><div>
+    <p class="point-title">Admin Panel Implementation</p>
+    <p class="point-explain">Content management interface for lessons, categories, and the word dataset.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">7</div><div>
+    <p class="point-title">Key Screenshots / Snippets</p>
+    <p class="point-explain">Illustrative evidence of the above, tied back to the design diagrams in Chapter 5.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 8 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 08</div>
+  <h2>Testing &amp; Evaluation</h2>
+  <span class="status-badge upcoming">Upcoming</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Functional Testing</p>
+    <p class="point-explain">Verifying that each functional requirement from Chapter 3 works as specified.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Usability Testing</p>
+    <p class="point-explain">Whether the lesson loop and gamification mechanics feel intuitive to test users.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Recognition Accuracy Testing</p>
+    <p class="point-explain">Real-user testing of the model beyond the offline test set, under real-world browser and camera conditions.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Performance Testing</p>
+    <p class="point-explain">Latency of in-browser keypoint extraction and inference, since this determines the responsiveness of the production test.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Privacy / Security Testing</p>
+    <p class="point-explain">Confirming the consent flow triggers correctly, no raw video persists, and Firestore rules hold under test conditions.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">6</div><div>
+    <p class="point-title">User Feedback</p>
+    <p class="point-explain">Any pilot feedback collected, and how it shaped further iteration.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 9 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 09</div>
+  <h2>Results &amp; Discussion</h2>
+  <span class="status-badge upcoming">Upcoming</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Achieved vs. Planned Scope</p>
+    <p class="point-explain">An honest comparison of what was delivered against the objectives set out in Chapter 1.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Model Performance Results</p>
+    <p class="point-explain">Concrete numbers from Chapters 6 and 8, discussed in context — is accuracy good enough for a real learning tool?</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">System Demo Walkthrough</p>
+    <p class="point-explain">A narrated example of a user going through a full lesson, start to finish.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">4</div><div>
+    <p class="point-title">Limitations</p>
+    <p class="point-explain">Small word set, dataset size, and browser/hardware constraints — and how these shaped design decisions along the way.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">5</div><div>
+    <p class="point-title">Comparison to Existing Apps</p>
+    <p class="point-explain">Revisits the Mushir/Esharti gap identified in Chapter 1 and shows how this project specifically addresses it.</p>
+  </div></div>
+</div>
+</div>
+
+<!-- ================= CHAPTER 10 ================= -->
+<div class="page">
+<div class="chapter">
+  <div class="chapter-label">Chapter 10</div>
+  <h2>Conclusion &amp; Future Work</h2>
+  <span class="status-badge upcoming">Upcoming</span>
+
+  <div class="point"><div class="point-num">1</div><div>
+    <p class="point-title">Summary of Contributions</p>
+    <p class="point-explain">The original PSL dataset and the working camera-verified learning tool, as the project's two headline outcomes.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">2</div><div>
+    <p class="point-title">Lessons Learned</p>
+    <p class="point-explain">Team and technical reflections — what would be done differently with more time or resources.</p>
+  </div></div>
+
+  <div class="point"><div class="point-num">3</div><div>
+    <p class="point-title">Future Work</p>
+    <p class="point-explain">Expanding vocabulary beyond 30–40 words, a native mobile app, a larger and more diverse dataset, an improved model architecture, and community-sourced data expansion.</p>
+  </div></div>
+</div>
+
+<div class="footer-note">PSL Learning Platform — Graduation Project · PTUK University · Chapter Outline Document</div>
+</div>
+
+</body>
+</html>
